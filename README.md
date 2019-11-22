@@ -1,2 +1,7 @@
 # SignDCL
-An easy-to-use GUI to perform contour tracking, extract immobility and freezing episodes.
+
+SignT
+An easy-to-use GUI to perform contour tracking.
+
+SignX
+An easy-to-use GUI to extract immobility and freezing episodes.
