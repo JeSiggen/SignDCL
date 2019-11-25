@@ -49,7 +49,7 @@ classdef SignT < handle
     %       - Add the possibility to compute a "moving" background
     %
     %
-    %     Copyright (C) 2019 Jérémy Signoret-Genest, DefenseCircuitsLab
+    %     Copyright (C) 2019 JÃ©rÃ©my Signoret-Genest, DefenseCircuitsLab
     %
     %     This program is free software: you can redistribute it and/or modify
     %     it under the terms of the GNU General Public License as published by
@@ -113,7 +113,7 @@ classdef SignT < handle
     
 methods
      % Constructor
-        function obj = TrackingGUI_Beta
+        function obj = SignT
             %% Parameters
                 % This system makes our lives easier when handling all the
                 % parameters at once (restoring, keeping in memory, saving),
