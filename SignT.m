@@ -546,11 +546,17 @@ methods(Hidden)
     end
     
     % Track and display the results
-    function varargout = ProcessFrame(obj,ModeProcessFrame)
+    
+    function varargout = ProcessFrame(obj,ModeProcessFrame,varargin)
+        if isempty(varargin),
+            Movie = obj.Movie;
+        else
+            Movie = varargin{1};
+        end
         varargout = {};
-        if obj.Movie.hasFrame,
-            obj.CurrentTime = obj.Movie.CurrentTime;
-            FrameF = obj.Movie.readFrame;
+        if Movie.hasFrame,
+            obj.CurrentTime = Movie.CurrentTime;
+            FrameF = Movie.readFrame;
             if strcmpi(obj.Parameters.VideoMode,'RGB'),
                 % Check which channel to use
                 Frame0 = FrameF;
@@ -769,14 +775,14 @@ methods(Hidden)
                 else
                     hold(obj.SubMovie,'on')
                     obj.SpeedText = text(0,0,'x1','FontSize',22,'FontName','Arial','FontWeight','bold','Color','g','Parent',obj.SubMovie);
-                    obj.SpeedText.Position(1) = 0.85*obj.Movie.Width;
-                    obj.SpeedText.Position(2) = 0.95*obj.Movie.Height;
+                    obj.SpeedText.Position(1) = 0.85*Movie.Width;
+                    obj.SpeedText.Position(2) = 0.95*Movie.Height;
                     obj.SpeedText.String = ['x' num2str(obj.Speed)];
                     obj.ContourPlot = plot(CC(1,:),CC(2,:),'g','LineWidth',2,'Parent',obj.SubMovie);
                     obj.CenterPlot = plot(Center_G(1),Center_G(2),'r+','LineWidth',2,'Parent',obj.SubMovie);
                     drawnow
                 end
-                obj.SliderLine.XData = [obj.Movie.CurrentTime obj.Movie.CurrentTime];
+                obj.SliderLine.XData = [Movie.CurrentTime Movie.CurrentTime];
             end
         end
     end
@@ -1551,7 +1557,7 @@ methods(Hidden)
                  TrueMask = true([Movie.Height Movie.Width]);
                  while Movie.hasFrame,
                      FrameCount = FrameCount + 1;
-                     [closeBW,CC] = obj.ProcessFrame('Process');
+                     [closeBW,CC] = obj.ProcessFrame('Process', Movie);
                      if any(closeBW,'all') && ~all(closeBW,'all'),
                          MaskContour{FrameCount} = closeBW;
                          MaskPixels(FrameCount) = numel(closeBW(closeBW==1));
